@@ -3,12 +3,12 @@
     Welcome to {{ title }}!
   </h1>
   <mat-form-field>
-    <input matInput [(ngModel)]="strFilter" placeholder="Type filter">
+    <input matInput [(ngModel)]="searchText" placeholder="Type filter">
   </mat-form-field>
   <br />
   <div class="mat-radio-container">
-    <mat-radio-group [(ngModel)]="ignoreCase" name="case" >Case:
-      <mat-radio-button id="mat-radio-case-ignore" [value]="true" aria-label="Ignore" [checked]="ignoreCase">
+    <mat-radio-group [(ngModel)]="ignoreTextCase" name="case" >Case:
+      <mat-radio-button id="mat-radio-case-ignore" [value]="true" aria-label="Ignore">
         <label class="mat-radio-label" for="mat-radio-case-ignore">Ignore</label>
       </mat-radio-button>
       <mat-radio-button id="mat-radio-case-sensitive" [value]="false" aria-label="Sensitive">
@@ -24,17 +24,8 @@
     <tr><th>Make</th><th>Date of manufacture</th><th>Mileage</th><th>Color</th><th>Is for sale</th></tr>
     </thead>
 
-    <tbody *ngIf="strFilter">
-      <tr *ngFor="let car of filterCars()">
-        <td>{{car.make}}</td>
-        <td>{{car.manufactureDate | date: "MMMM dd yyyy"}}</td>
-        <td>{{car.mileage}}</td>
-        <td>{{car.color}}</td>
-        <td><mat-checkbox [checked]="car.forSale" [disabled]="true"></mat-checkbox></td>
-      </tr>
-
-    <tbody *ngIf="!strFilter">
-    <tr *ngFor="let car of cars">
+    <tbody>
+    <tr *ngFor="let car of cars | markFilter : searchText : ignoreTextCase">
       <td>{{car.make}}</td>
       <td>{{car.manufactureDate | date: "MMMM dd yyyy"}}</td>
       <td>{{car.mileage}}</td>

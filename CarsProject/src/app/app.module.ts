@@ -6,10 +6,11 @@ import {MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatR
 
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
+import { CarMarkFilterPipe } from './car.mark.filter.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, CarMarkFilterPipe
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule,

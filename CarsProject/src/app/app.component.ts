@@ -23,23 +23,4 @@ export class AppComponent {
     {make: 'BMW', mileage: 30231110.758, manufactureDate: new Date('2000-02-13'), color: Color.Black, forSale: true},
     {make: 'BMW', mileage: 3023210.759, manufactureDate: new Date('2005-1-01'), color: Color.Red, forSale: false},
   ];
-  strFilter: string;
-  ignoreCase = true;
-
-
-  filterCars() {
-    if (this.ignoreCase) {
-      return this.cars.filter(this.filterIgnoreCase());
-    } else {
-      return this.cars.filter(this.filterSensitiveCase());
-    }
-  }
-
-  private filterIgnoreCase() {
-    return car => car.make.toLowerCase().includes(this.strFilter.toLowerCase());
-  }
-
-  private filterSensitiveCase() {
-    return car => car.make.includes(this.strFilter);
-  }
 }
