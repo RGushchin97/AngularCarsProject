@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {CarModel} from "./models/car.model";
+import {CarModel} from "./car.model";
 
 @Pipe({
   name: 'markFilter'
 })
 
-export class CarMarkFilterPipe implements PipeTransform {
+export class CarMakeFilterPipe implements PipeTransform {
   private make: string;
   transform(cars: CarModel[], searchText: string, ignoreCase: boolean): any[] {
     if(!cars) return [];
