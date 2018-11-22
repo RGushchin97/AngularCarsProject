@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <h1 [hidden]="!title">
+    Welcome to {{ title }}!
+  </h1>
+  <mat-form-field>
+    <input matInput [(ngModel)]="searchText" placeholder="Type filter" />
+  </mat-form-field>
+  <br />
+  <div class="mat-radio-container">
+    <mat-radio-group [(ngModel)]="ignoreTextCase" name="case" >Case:
+      <mat-radio-button name="mat-radio-case-ignore" [value]="true" aria-label="Ignore">
+        Ignore
+      </mat-radio-button>
+      <mat-radio-button name="mat-radio-case-sensitive" [value]="false" aria-label="Sensitive">
+        Sensitive
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+<div>
+
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+    <tr><th>Make</th><th>Date of manufacture</th><th>Mileage</th><th>Color</th><th>Is for sale</th></tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let car of cars | markFilter : searchText : ignoreTextCase">
+      <ng-template [ngTemplateOutlet]="loadTemplate(car)"
+                   [ngTemplateOutletContext]="{ $implicit: car}">
+      </ng-template>
+    </tr>
+  </table>
+  <button mat-button class="btn btn-block" color="primary" (click)="addCar()" [disabled]="newCar !== null">Add car</button>
+
+  <ng-template #editTemplate>
+      <td>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newCar.make" placeholder="Make"
+                 required #carMake="ngModel">
+          <mat-error *ngIf="carMake.hasError('required')">
+            Make is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [max]="today" [matDatepicker]="carDate" [(ngModel)]="newCar.manufactureDate"
+                 placeholder="Date of manufacture" required #carManufactureDate="ngModel"/>
+          <mat-datepicker-toggle matSuffix [for]="carDate"></mat-datepicker-toggle>
+          <mat-datepicker #carDate disabled="false"></mat-datepicker>
+          <mat-error *ngIf="carManufactureDate.hasError('required')">
+            Date of manufacture is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput type="number" step="0.01" [(ngModel)]="newCar.mileage" min="0" placeholder="Mileage"/>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-select [(ngModel)]="newCar.color" placeholder="Car color" [(value)]="newCar.color">
+            <mat-option *ngFor="let color of colors.values()" [value]="color">
+              {{color}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-checkbox [(ngModel)]="newCar.forSale" title="For sale"></mat-checkbox>
+      </td>
+    <div align="center">
+      <button mat-button color="primary" (click)="saveCar()" class="btn-left half-width"
+              [disabled]="true">Save</button>
+      <button mat-button color="warn" (click)="cancelCar()" class="half-width">Cancel</button>
+    </div>
+  </ng-template>
+
+  <ng-template #readOnlyTemplate let-car>
+    <td>{{car.make}}</td>
+    <td>{{car.manufactureDate | date: "MMMM dd yyyy"}}</td>
+    <td>{{car.mileage}}</td>
+    <td>{{car.color}}</td>
+    <td><mat-checkbox [checked]="car.forSale" [disabled]="true"></mat-checkbox></td>
+    <button mat-button color="warn" class="btn-block" (click)="deleteCar(car)">Delete</button>
+  </ng-template>
+</div>
+

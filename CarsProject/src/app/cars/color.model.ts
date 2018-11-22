@@ -5,5 +5,14 @@ export enum Color {
   White = 'White',
   Black = 'Black',
   Yellow = 'Yellow',
-  Orange = 'Orange'
+  Orange = 'Orange',
+}
+
+export namespace Color {
+
+  export function values() {
+    return Object.keys(Color).filter(
+      (type) => isNaN(<any>type) && type !== 'values'
+    );
+  }
 }
