@@ -8,8 +8,6 @@ import {CarsService} from '../../services/cars.service';
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit {
-  @ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
-  @ViewChild('editTemplate') editTemplate: TemplateRef<any>;
   displayedColumns: string[] = ['make', 'date', 'mileage', 'color', 'forSale', 'delBtns'];
   cars: Array<CarModel>;
   ignoreTextCase = true;
@@ -17,14 +15,21 @@ export class CarsComponent implements OnInit {
   constructor(private service: CarsService) {  }
 
   ngOnInit() {
-    this.cars = this.service.getCars();
+    this.loadCars();
   }
 
   deleteCar(car: CarModel) {
     if (confirm('Are you sure you want to delete this car?')) {
       this.service.deleteCar(car);
-      this.cars = this.service.getCars();
     }
+    this.loadCars();
+  }
+
+  private loadCars() {
+    this.cars = [];
+    this.service.getCars().map((car) => {
+      this.cars.push(car);
+    });
   }
 }
 
