@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {CarModel} from "./car.model";
+import {CarModel} from '../models/car.model';
 
 @Pipe({
   name: 'markFilter'
@@ -8,12 +8,12 @@ import {CarModel} from "./car.model";
 export class CarMakeFilterPipe implements PipeTransform {
   private make: string;
   transform(cars: CarModel[], searchText: string, ignoreCase: boolean): any[] {
-    if(!cars) return [];
-    if(!searchText) return cars;
+    if (!cars) { return []; }
+    if (!searchText) { return cars; }
 
     return cars.filter( car => {
       this.make = car.make;
-      if(ignoreCase) {
+      if (ignoreCase) {
         searchText = searchText.toLowerCase();
         this.make = this.make.toLowerCase();
       }

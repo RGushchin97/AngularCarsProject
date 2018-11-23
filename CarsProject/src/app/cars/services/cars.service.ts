@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {CarModel} from './car.model';
-import {Color} from './color.model';
+import {CarModel} from '../models/car.model';
+import {Color} from '../models/color.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarsService {
 
-  cars: Array<CarModel>;
+  private cars: Array<CarModel>;
 
   constructor() {
     this.cars = [
@@ -34,5 +34,9 @@ export class CarsService {
     if (index !== -1) {
       this.cars.splice(index, 1);
     }
+  }
+
+  getCars() {
+    return this.cars;
   }
 }

@@ -7,7 +7,7 @@ import {
   MatInputModule,
   MatMenuModule, MatNativeDateModule,
   MatRadioModule,
-  MatRippleModule, MatSelectModule, MatTableDataSource, MatTableModule
+  MatRippleModule, MatSelectModule, MatTableModule
 } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -15,11 +15,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CarMakeFilterPipe } from './cars/car-make-filter.pipe';
-import { CarsComponent } from './cars/cars.component';
+import { CarMakeFilterPipe } from './cars/filters/car-make-filter.pipe';
+import { CarsComponent } from './cars/components/cars/cars.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { AddCarComponent } from './add-car/add-car.component';
+import { AddCarComponent } from './cars/components/add-car/add-car.component';
 
 const appRoutes: Routes = [
   { path: 'cars', component: CarsComponent },

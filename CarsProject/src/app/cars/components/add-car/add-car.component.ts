@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CarModel} from '../cars/car.model';
-import {Color} from '../cars/color.model';
+import {CarModel} from '../../models/car.model';
+import {Color} from '../../models/color.model';
 import {FormBuilder, Validators} from '@angular/forms';
-import {CarsService} from '../cars/cars.service';
+import {CarsService} from '../../services/cars.service';
 import {Router} from '@angular/router';
 
 @Component({

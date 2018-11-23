@@ -5,7 +5,7 @@
   <br />
   <div class="mat-radio-container">
     <mat-radio-group [(ngModel)]="ignoreTextCase" name="case">Case:
-      <mat-radio-button name="mat-radio-case-ignore" [value]="true" aria-label="Ignore">
+      <mat-radio-button name="mat-radio-case-ignore" [value]="true" aria-label="Ignore" [checked]="ignoreTextCase === true">
         Ignore
       </mat-radio-button>
       <mat-radio-button name="mat-radio-case-sensitive" [value]="false" aria-label="Sensitive">
