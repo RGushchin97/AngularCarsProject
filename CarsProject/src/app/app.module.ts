@@ -7,7 +7,7 @@ import {
   MatInputModule,
   MatMenuModule, MatNativeDateModule,
   MatRadioModule,
-  MatRippleModule, MatSelectModule
+  MatRippleModule, MatSelectModule, MatTableDataSource, MatTableModule
 } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -17,23 +17,36 @@ import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CarMakeFilterPipe } from './cars/car-make-filter.pipe';
 import { CarsComponent } from './cars/cars.component';
-import {RouterModule, Routes} from "@angular/router";
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {RouterModule, Routes} from '@angular/router';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AddCarComponent } from './add-car/add-car.component';
 
 const appRoutes: Routes = [
   { path: 'cars', component: CarsComponent },
-  { path: '', redirectTo: '/cars', pathMatch: 'full' }
+  { path: '', redirectTo: '/cars', pathMatch: 'full' },
+  { path: 'cars/create', component: AddCarComponent }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, CarMakeFilterPipe, CarsComponent
+    AppComponent, CarMakeFilterPipe, CarsComponent, AddCarComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    BrowserModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule,
-    MatButtonModule, MatCheckboxModule, MatRadioModule,
-    MatInputModule, MatRippleModule, MatToolbarModule, MatMenuModule, MatSelectModule, MatDatepickerModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatInputModule,
+    MatRippleModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatDatepickerModule,
     MatNativeDateModule
   ],
   providers: [],

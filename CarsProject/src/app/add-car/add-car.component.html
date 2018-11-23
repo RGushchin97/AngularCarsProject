@@ -1,0 +1,45 @@
+<form class="flex-column container-fluid" [formGroup]="addingForm">
+    <mat-form-field>
+      <input matInput placeholder="Make"
+             name="carMake" formControlName="makeControl" required>
+      <mat-error *ngIf="addingForm.invalid">
+        {{getErrorMessage('makeControl')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [max]="today" [matDatepicker]="carDate" formControlName="dateControl"
+             placeholder="Date of manufacture" required name="manufactureDate">
+      <mat-datepicker-toggle matSuffix [for]="carDate"></mat-datepicker-toggle>
+      <mat-datepicker #carDate disabled="false"></mat-datepicker>
+      <mat-error *ngIf="addingForm.invalid">
+        {{getErrorMessage('dateControl')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="mileageControl" placeholder="Mileage" name="carMileage"
+             required>
+      <mat-error *ngIf="addingForm.invalid">
+        {{getErrorMessage('mileageControl')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Car color" formControlName="colorControl"
+                  name="carColor" required>
+        <mat-option *ngFor="let color of colors.values()" [value]="color">
+          {{color}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="addingForm.invalid">
+        {{getErrorMessage('colorControl')}}
+      </mat-error>
+    </mat-form-field>
+  <div>
+    <mat-label class="margin-right">Car is for sale</mat-label>
+    <mat-checkbox  formControlName="forSaleControl" title="For sale" name="carForSale"></mat-checkbox>
+  </div>
+  <button mat-button color="primary" (click)="saveCar()" class="btn-left half-width"
+          [disabled]="addingForm.invalid">Save</button>
+  <button mat-button color="warn" routerLink="/cars" class="half-width">Cancel</button>
+</form>
+<div align="center">
+</div>
