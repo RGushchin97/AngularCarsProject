@@ -1,18 +1,21 @@
 import {CarModel} from '../../models/car.model';
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CarsService} from '../../services/cars.service';
 
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.css']
+  styleUrls: ['./cars.component.css'],
+  providers: [CarsService]
 })
+
 export class CarsComponent implements OnInit {
   displayedColumns: string[] = ['make', 'date', 'mileage', 'color', 'forSale', 'delBtns'];
-  cars: Array<CarModel>;
+  cars: Array<CarModel> = [];
   ignoreTextCase = true;
 
-  constructor(private service: CarsService) {  }
+  constructor(private service: CarsService) {
+  }
 
   ngOnInit() {
     this.loadCars();
@@ -26,10 +29,7 @@ export class CarsComponent implements OnInit {
   }
 
   private loadCars() {
-    this.cars = [];
-    this.service.getCars().map((car) => {
-      this.cars.push(car);
-    });
+    this.service.getCars().subscribe((data) => this.cars = data);
   }
 }
 

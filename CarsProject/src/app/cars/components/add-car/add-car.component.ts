@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class AddCarComponent implements OnInit {
 
-  newCar = new CarModel(null, null, null, null, null, false);
   colors = Color;
   today = new Date(Date.now());
   addingForm: any;
@@ -31,8 +30,8 @@ export class AddCarComponent implements OnInit {
   }
 
   saveCar() {
-    this.service.addCar(this.parseCar());
-    this.router.navigate(['']);
+    this.service.createCar(this.parseCar());
+    return this.router.navigate(['']);
   }
 
   parseCar() {

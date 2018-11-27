@@ -20,6 +20,7 @@ import { CarsComponent } from './cars/components/cars/cars.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { AddCarComponent } from './cars/components/add-car/add-car.component';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'cars', component: CarsComponent },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
