@@ -4,6 +4,8 @@ import {Color} from '../../models/color.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {CarsService} from '../../services/cars.service';
 import {Router} from '@angular/router';
+import {CarsComponent} from '../cars/cars.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-add-car',
@@ -15,8 +17,12 @@ export class AddCarComponent implements OnInit {
   colors = Color;
   today = new Date(Date.now());
   addingForm: any;
+  cars: Array<CarModel>;
+  subscriptions: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private service: CarsService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private service: CarsService,
+              private router: Router) {
     this.addingForm = this.fb.group({
       makeControl: [null, [Validators.required]],
       dateControl: [null, [Validators.required]],
@@ -27,11 +33,14 @@ export class AddCarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadCars();
   }
 
   saveCar() {
-    this.service.createCar(this.parseCar());
-    return this.router.navigate(['']);
+    this.subscriptions.push(this.service.createCar(this.parseCar()).subscribe(() => {
+      this.loadCars();
+    }));
+    this.router.navigate(['']);
   }
 
   parseCar() {
@@ -54,5 +63,11 @@ export class AddCarComponent implements OnInit {
     if (this.addingForm.get(control).invalid) {
       return errorMessage;
     }
+  }
+
+  loadCars() {
+    this.subscriptions.push(this.service.cars.subscribe(cars => {
+      this.cars = cars as CarModel[];
+    }));
   }
 }

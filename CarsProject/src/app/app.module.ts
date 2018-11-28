@@ -12,7 +12,6 @@ import {
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 
-
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CarMakeFilterPipe } from './cars/filters/car-make-filter.pipe';
@@ -21,6 +20,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { AddCarComponent } from './cars/components/add-car/add-car.component';
 import {HttpClientModule} from '@angular/common/http';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
 const appRoutes: Routes = [
   { path: 'cars', component: CarsComponent },
@@ -49,7 +49,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
