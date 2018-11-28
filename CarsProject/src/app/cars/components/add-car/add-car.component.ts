@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {CarModel} from '../../models/car.model';
 import {Color} from '../../models/color.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {CarsService} from '../../services/cars.service';
 import {Router} from '@angular/router';
-import {CarsComponent} from '../cars/cars.component';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -12,7 +11,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './add-car.component.html',
   styleUrls: ['./add-car.component.css']
 })
-export class AddCarComponent implements OnInit {
+export class AddCarComponent {
 
   colors = Color;
   today = new Date(Date.now());
@@ -32,14 +31,10 @@ export class AddCarComponent implements OnInit {
   });
   }
 
-  ngOnInit() {
-    this.loadCars();
-  }
-
   saveCar() {
     this.subscriptions.push(this.service.createCar(this.parseCar()).subscribe(() => {
-      this.loadCars();
     }));
+    setTimeout(() => this.addingForm());
     this.router.navigate(['']);
   }
 
@@ -63,11 +58,5 @@ export class AddCarComponent implements OnInit {
     if (this.addingForm.get(control).invalid) {
       return errorMessage;
     }
-  }
-
-  loadCars() {
-    this.subscriptions.push(this.service.cars.subscribe(cars => {
-      this.cars = cars as CarModel[];
-    }));
   }
 }
